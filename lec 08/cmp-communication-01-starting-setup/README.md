@@ -2,6 +2,9 @@
 
 ### Ways to use Components
 
-- Simple way 'Props array'
+- Props array (Parent => Child Comunication)
+
   - Use **kebab-case** writting at html
   - Use **camelCase** in vue Componants
+
+- Prop Behavior & Changing Props
