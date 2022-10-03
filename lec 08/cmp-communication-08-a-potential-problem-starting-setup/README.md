@@ -1,7 +1,8 @@
 # Providing and Injecting
 
-######  _Props & CustomEvents_ **should be Default comunication mechanism** more than _provide & inject_
-- Consider using _provide & inject_ when I have some pass through components
+###### _Props & CustomEvents_ **should be Default comunication mechanism** more than _provide & inject_
+
+- Consider using _provide & inject_ when I have some pass through components '**_Long rang comunication_**'
 
 ### Notes:
 
