@@ -4,7 +4,7 @@
       :topic-title="activeTopic && activeTopic.title"
       :text="activeTopic && activeTopic.fullText"
     ></active-element>
-    <knowledge-base @select-topic="activateTopic"></knowledge-base>
+    <knowledge-base></knowledge-base>
   </div>
 </template>
 
@@ -35,6 +35,8 @@ export default {
   provide() {
     return {
       topics: this.topics,
+      // provide what are u waiting to listening 'selectTopic' and conect "Don't forget pass ID from activateTopic" it to the activateTopic()
+      selectTopic: this.activateTopic,
     };
   },
   methods: {
