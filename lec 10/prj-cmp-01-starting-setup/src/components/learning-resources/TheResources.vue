@@ -9,9 +9,9 @@
       >Add Resources</base-button
     >
   </base-card>
-    <keep-alive>
-      <component :is="selectedTab"></component>
-    </keep-alive>
+  <keep-alive>
+    <component :is="selectedTab"></component>
+  </keep-alive>
 </template>
 
 <script>
@@ -21,6 +21,13 @@ export default {
   components: {
     AddResource,
     StoredResources,
+  },
+  provide() {
+    return {
+      resources: this.storedResources, // now we provided 'resources' to all lower level components
+      addResource: this.addResource, // Point at the method for injecting in another component
+      deleteResource: this.removeResource, // Point at Delete resource method, then inject it at LearningResource where is the Delete btn
+    };
   },
   data() {
     return {
@@ -50,8 +57,8 @@ export default {
     },
   },
   methods: {
-    setSelectTab(cmp) {
-      this.selectedTab = cmp;
+    setSelectTab(tap) {
+      this.selectedTab = tap;
     },
     addResource(title, description, url) {
       const newResource = {
@@ -60,16 +67,24 @@ export default {
         description: description,
         link: url,
       };
-      this.storedResources.shift(newResource);
+      this.storedResources.unshift(newResource);
       // Switch to storedResources tap after adding new resource
       this.selectedTab = 'stored-resources';
     },
-  },
-  provide() {
-    return {
-      resources: this.storedResources, // now we provided 'resources' to all lower level components
-      addResource: this.addResource, // Point at the method for injecting in another component
-    };
+    // DeleteResource Method useing ID
+    removeResource(resId) {
+      // -**- This approach is providing "storedResources" with a new array
+      // * Problem is all components with 'provide & inject' Still working with Original array
+      // this.storedResources = this.storedResources.filter(
+      //   (res) => res.id !== resId
+      // );
+      // -----------------------------//
+      // ** Solution is Manipulate the original array using Index
+      const resIndex = this.storedResources.findIndex(
+        (res) => res.id === resId
+      );
+      this.storedResources.splice(resIndex, 1);
+    },
   },
 };
 </script>

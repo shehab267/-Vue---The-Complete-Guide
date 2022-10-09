@@ -17,4 +17,3 @@ dialog {
 }
 </style>
 
-<script></script>

@@ -1,4 +1,17 @@
 <template>
+  <base-dialog
+    v-if="inputIsInvalid"
+    title="Invalid Input"
+    @close="confirmError"
+  >
+    <template #default>
+      <p>Unfortunately, at least one input value is invalid</p>
+      <p>Please cheak all inputs and make sure to fill all input field</p>
+    </template>
+    <template #actions>
+      <base-button @click="confirmError">Okay</base-button>
+    </template>
+  </base-dialog>
   <base-card>
     <form @submit.prevent="submitData">
       <div class="form-control">
@@ -16,7 +29,7 @@
       </div>
       <div class="form-control">
         <label for="link">Link</label>
-        <input type="url" id="link" link="link" ref="linkInput" />
+        <input type="url" id="link" name="link" ref="linkInput" />
       </div>
       <div>
         <base-button type="submit">Add Resource</base-button>
@@ -28,19 +41,40 @@
 <script>
 export default {
   inject: ['addResource'],
+  data() {
+    return {
+      inputIsInvalid: false,
+    };
+  },
+
   methods: {
     submitData() {
-      const enterdInput = this.$ref.titleInput.value;
-      const enterdDescription = this.$ref.descInput.value;
-      const enterdUrl = this.$ref.linkInput.value;
+      let enteredTitle = this.$refs.titleInput.value;
+      let enteredDescription = this.$refs.descInput.value;
+      let enteredUrl = this.$refs.linkInput.value;
 
-      this.addResource(enterdInput, enterdDescription, enterdUrl);
+      // Error With invalid 'Empty' Value
+      if (
+        enteredTitle.trim() === '' ||
+        enteredDescription.trim() === '' ||
+        enteredUrl.trim() === ''
+      ) {
+        this.inputIsInvalid = true;
+        return;
+      }
+      this.addResource(enteredTitle, enteredDescription, enteredUrl);
+      this.$refs.titleInput.value = '';
+      this.$refs.descInput.value = '';
+      this.$refs.linkInput.value = '';
+    },
+    confirmError() {
+      this.inputIsInvalid = false;
     },
   },
 };
 </script>
 
-<style>
+<style scoped>
 label {
   font-weight: bold;
   display: block;

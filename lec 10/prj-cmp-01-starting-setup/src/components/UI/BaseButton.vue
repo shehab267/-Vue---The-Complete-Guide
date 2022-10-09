@@ -13,11 +13,13 @@ export default {
 button {
   padding: 0.75rem 1.5rem;
   font-family: inherit;
-  background-color: #3a0061;
+  font-weight: bold;
+  background-color: #14005e;
   border: 1px solid #3a0061;
   border-radius: 10px;
   color: white;
   cursor: pointer;
+  margin-right: 5px;
 }
 
 button:hover,
