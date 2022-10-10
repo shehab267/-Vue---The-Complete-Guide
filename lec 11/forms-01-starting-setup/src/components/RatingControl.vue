@@ -1,39 +1,40 @@
 <template>
   <ul>
-    <li :class="{ poor: activeOption === 'poor' }">
+    <li :class="{ poor: modelValue === 'poor' }">
       <button type="button" @click="activate('poor')">Poor</button>
     </li>
-    <li :class="{ average: activeOption === 'average' }">
-      <button
-        :class="{ activeOption }"
-        type="button"
-        @click="activate('average')"
-      >
-        Average
-      </button>
+    <li :class="{ average: modelValue === 'average' }">
+      <button type="button" @click="activate('average')">Average</button>
     </li>
-    <li :class="{ great: activeOption === 'great' }">
-      <button
-        :class="{ activeOption }"
-        type="button"
-        @click="activate('great')"
-      >
-        Great
-      </button>
+    <li :class="{ great: modelValue === 'great' }">
+      <button type="button" @click="activate('great')">Great</button>
     </li>
   </ul>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      activeOption: null,
-    };
-  },
+  // v-model on custom Components needs to conenct with the component USING:
+  // 1- "props: ['modelValue']"
+  // 2- emits: ['update:modelValue']
+  props: ['modelValue'],
+  emits: ['update:modelValue'],
+  // data() {
+  //   return {
+  //     activeOption: this.modelValue,
+  //   };
+  // },
+  // ** updating back the modelvalue at the main component
+  // *** Or using modelValue insted of activeOption in
+  // computed: {
+  //   activeOption() {
+  //     return this.modelValue;
+  //   },
+  // },
   methods: {
     activate(option) {
-      this.activeOption = option;
+      // this.activeOption = option;
+      this.$emit('update:modelValue', option);
     },
     activeClass() {
       console.log(this.activeOption.value);

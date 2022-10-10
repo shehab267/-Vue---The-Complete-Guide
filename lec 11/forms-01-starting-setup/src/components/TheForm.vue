@@ -101,7 +101,7 @@
       </div>
     </div>
     <div>
-      <rating-control></rating-control>
+      <rating-control v-model="rating"></rating-control>
     </div>
     <div class="form-control">
       <h2>How do you learn?</h2>
@@ -131,6 +131,7 @@ export default {
       how: null,
       confirm: false,
       userNameValidity: 'pending',
+      rating: null,
     };
   },
   methods: {
@@ -138,8 +139,6 @@ export default {
       console.log(`UserName: ${this.userName}`);
       this.userName = '';
       console.log(this.userAge);
-      console.log(this.$refs.userAge);
-      console.log(500);
       console.log(`Referrer: ${this.referrer}`);
       this.referrer = 'google';
       console.log(this.interest.length);
@@ -148,6 +147,8 @@ export default {
       this.how = null;
       console.log(this.confirm);
       this.confirm = false;
+      console.log(`Rating: ${this.rating}`);
+      this.rating = null;
     },
     validateInput() {
       if (this.userName === '') {
