@@ -41,6 +41,7 @@
         <p v-if="invalidInput">
           One or more input fields are invalid. Please check your provided data.
         </p>
+        <p v-if="errorMsg">{{ errorMsg }}</p>
         <div>
           <base-button>Submit</base-button>
         </div>
@@ -50,12 +51,15 @@
 </template>
 
 <script>
+// import { response } from 'express';
+
 export default {
   data() {
     return {
       enteredName: '',
       chosenRating: null,
       invalidInput: false,
+      errorMsg: null,
     };
   },
   // emits: ['survey-submit'],
@@ -71,6 +75,7 @@ export default {
       //   userName: this.enteredName,
       //   rating: this.chosenRating,
       // });
+      this.errorMsg = null;
       fetch(
         'https://vue-http-demo-aadd3-default-rtdb.firebaseio.com/serveys.json/',
         {
@@ -83,8 +88,19 @@ export default {
             rating: this.chosenRating,
           }),
         }
-      );
-      this.enteredName = '';
+      )
+        .then((response) => {
+          if (response.ok) {
+            // ...
+          } else {
+            throw new Error("Couldn't save data!");
+          }
+        })
+        .catch((errorMsg) => {
+          console.error(errorMsg);
+          this.errorMsg = errorMsg.message;
+        }),
+        (this.enteredName = '');
       this.chosenRating = null;
     },
   },
