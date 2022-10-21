@@ -12,7 +12,7 @@ import UsersFooter from './components/users/UsersFooter.vue';
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: '/', redirect: '/teams' }, // We could use "alias: '/' ", but it dosen't change the URL
+    { path: '/', redirect: '/teams' }, // We could use "alias: '/' ", but it dosen't change the URL.
     {
       name: 'teams',
       path: '/teams',
