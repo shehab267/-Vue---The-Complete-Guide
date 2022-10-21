@@ -9,6 +9,7 @@
         :role="member.role"
       ></user-item>
     </ul>
+    <router-link to="/teams/t2"> <h4>Go to team 2</h4> </router-link>
   </section>
 </template>
 
@@ -16,17 +17,42 @@
 import UserItem from '../users/UserItem.vue';
 
 export default {
+  inject: ['users', 'teams'],
+  // all the next steps important "If we need to make the component reuseable"
+  props: ['teamId'],
+  // Now we add teamId as prop but route 'By default' dosen't add any props to loaded component
+  // -> solution for the issue above is add 'props: true' to route "main" so he will read that "the dynamic" propperties should be passed into component as props rather than $route
   components: {
-    UserItem
+    UserItem,
   },
   data() {
     return {
-      teamName: 'Test',
-      members: [
-        { id: 'u1', fullName: 'Max Schwarz', role: 'Engineer' },
-        { id: 'u2', fullName: 'Max Schwarz', role: 'Engineer' },
-      ],
+      teamName: '',
+      members: [],
     };
+  },
+  methods: {
+    loadTeamMembers(teamId) {
+      // const teamId = route.params.teamId; // everything start with the column is parameter ' :teamId'
+      const selectedTeam = this.teams.find((team) => team.id === teamId);
+      const members = selectedTeam.members;
+      const selectedMembers = [];
+      for (const member of members) {
+        const selectedUser = this.users.find((user) => user.id === member);
+        selectedMembers.push(selectedUser);
+      }
+      this.members = selectedMembers;
+      this.teamName = selectedTeam.name;
+    },
+  },
+  created() {
+    this.loadTeamMembers(this.teamId);
+    console.log(this.$route.query);
+  },
+  watch: {
+    teamId(newId) {
+      this.loadTeamMembers(newId);
+    },
   },
 };
 </script>
@@ -48,5 +74,9 @@ ul {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+a {
+  text-decoration: none;
 }
 </style>
