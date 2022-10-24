@@ -4,6 +4,12 @@
     <button @click="animationActivation">Animate</button>
   </div>
   <div class="container">
+    <transition name="btn-fade" mode="out-in">
+      <button @click="showUsers" v-if="!userIsVisible">Show Users</button>
+      <button @click="hideUsers" v-else>Hide Users</button>
+    </transition>
+  </div>
+  <div class="container">
     <transition name="para">
       <p v-if="paraVisible">This is Sometime shows ...</p>
     </transition>
@@ -25,9 +31,16 @@ export default {
       animateBlock: false,
       dialogIsVisible: false,
       paraVisible: false,
+      userIsVisible: false,
     };
   },
   methods: {
+    showUsers() {
+      this.userIsVisible = true;
+    },
+    hideUsers() {
+      this.userIsVisible = false;
+    },
     animationActivation() {
       this.animateBlock = !this.animateBlock;
     },
@@ -113,6 +126,21 @@ button:active {
 .para-leave-to {
   opacity: 0;
   transform: translateY(-30px);
+}
+
+.btn-fade-enter-from,
+.btn-fade-leave-to {
+  opacity: 0;
+}
+.btn-fade-enter-active {
+  transition: opacity 0.3s ease-out;
+}
+.btn-fade-leave-active {
+  transition: opacity 0.3s ease-in;
+}
+.btn-fade-enter-to,
+.btn-fade-leave-from {
+  opacity: 1;
 }
 
 @keyframes slide-fade {
