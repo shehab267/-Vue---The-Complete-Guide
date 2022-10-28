@@ -1,5 +1,12 @@
 <template>
-  <div class="container">
+  <router-view v-slot="{ Component }">
+    <transition name="btn-fade" mode="out-in">
+      <component :is="Component"></component>
+    </transition>
+  </router-view>
+
+  <!-- ----------------------------------- -->
+  <!-- <div class="container">
   <users-list></users-list>
   </div>
   <div class="container">
@@ -34,15 +41,15 @@
   </base-modal>
   <div class="container">
     <button @click="showDialog">Show Dialog</button>
-  </div>
+  </div> -->
 </template>
 
 <script>
-import UsersList from './components/UsersList.vue';
+// import UsersList from './components/UsersList.vue';
 export default {
-  components: {
-    UsersList,
-  },
+  // components: {
+  //   // UsersList,
+  // },
   data() {
     return {
       animateBlock: false,
@@ -189,6 +196,17 @@ button:active {
 .btn-fade-enter-to,
 .btn-fade-leave-from {
   opacity: 1;
+}
+
+.route-enter-from {
+}
+.route-enter-active {
+  animation: slide-fade 0.4s ease-out;
+}
+.route-enter-to {
+}
+.route-leave-active {
+  animation: slide-fade 0.4s ease-in;
 }
 
 @keyframes slide-fade {
