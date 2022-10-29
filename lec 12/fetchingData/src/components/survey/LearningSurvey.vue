@@ -38,10 +38,13 @@
           />
           <label for="rating-great">Great</label>
         </div>
-        <p v-if="invalidInput">
-          One or more input fields are invalid. Please check your provided data.
-        </p>
-        <p v-if="errorMsg">{{ errorMsg }}</p>
+        <transition name="invalidInput">
+          <p class="invalid" v-if="invalidInput">
+            One or more input fields are invalid. Please check your provided
+            data.
+          </p>
+        </transition>
+        <p class="invalid" v-if="errorMsg">{{ errorMsg }}</p>
         <div>
           <base-button>Submit</base-button>
         </div>
@@ -51,8 +54,6 @@
 </template>
 
 <script>
-// import { response } from 'express';
-
 export default {
   data() {
     return {
@@ -75,6 +76,10 @@ export default {
       //   userName: this.enteredName,
       //   rating: this.chosenRating,
       // });
+
+      //   this.enteredName = '';
+      //   this.chosenRating = null;
+
       this.errorMsg = null;
       fetch(
         'https://vue-http-demo-aadd3-default-rtdb.firebaseio.com/serveys.json/',
@@ -99,8 +104,8 @@ export default {
         .catch((errorMsg) => {
           console.error(errorMsg);
           this.errorMsg = errorMsg.message;
-        }),
-        (this.enteredName = '');
+        });
+      this.enteredName = '';
       this.chosenRating = null;
     },
   },
@@ -116,5 +121,50 @@ input[type='text'] {
   display: block;
   width: 20rem;
   margin-top: 0.5rem;
+}
+.invalid {
+  color: rgb(209, 42, 13);
+  font-weight: 550;
+}
+.invalidInput-leave-from {
+  /* transform: translateY(0px); */
+  opacity: 1;
+}
+.invalidInput-enter-active {
+  /* transition: all 0.5s ease-out; */
+  animation: kf_shake 0.4s 1 linear;
+}
+
+.invalidInput-leave-active {
+  transition: all 0.5s ease-in-out;
+}
+.invalidInput-leave-to {
+  /* transform: translateY(-20px); */
+  opacity: 0;
+}
+
+.invalid {
+  animation: kf_shake 0.4s 1 linear;
+}
+
+@keyframes kf_shake {
+  0% {
+    -webkit-transform: translate(30px);
+  }
+  20% {
+    -webkit-transform: translate(-30px);
+  }
+  40% {
+    -webkit-transform: translate(15px);
+  }
+  60% {
+    -webkit-transform: translate(-15px);
+  }
+  80% {
+    -webkit-transform: translate(8px);
+  }
+  100% {
+    -webkit-transform: translate(0px);
+  }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
-  <learning-survey></learning-survey>
-  <user-experiences></user-experiences>
+  <learning-survey @survey-submit="storeSurvey"></learning-survey>
+  <user-experiences :results="savedSurveyResults"></user-experiences>
 </template>
 
 <script>
@@ -12,22 +12,22 @@ export default {
     LearningSurvey,
     UserExperiences,
   },
-  // data() {
-  //   return {
-  //     savedSurveyResults: [],
-  //   };
-  // },
-  // methods: {
-  //   storeSurvey(surveyData) {
-  //     const surveyResult = {
-  //       name: surveyData.userName,
-  //       rating: surveyData.rating,
-  //       id: new Date().toISOString(),
-  //     };
-  //     this.savedSurveyResults.push(surveyResult);
-  //     console.log(surveyResult);
-  //   },
-  // },
+  data() {
+    return {
+      savedSurveyResults: [],
+    };
+  },
+  methods: {
+    storeSurvey(surveyData) {
+      const surveyResult = {
+        name: surveyData.userName,
+        rating: surveyData.rating,
+        id: new Date().toISOString(),
+      };
+      this.savedSurveyResults.push(surveyResult);
+      console.log(surveyResult);
+    },
+  },
 };
 </script>
 
@@ -43,4 +43,21 @@ html {
 body {
   margin: 0;
 }
+
+/* .survey-enter-from {
+  transform: translateY(-20px);
+}
+.survey-enter-active {
+  transition: all 1s linear;
+}
+.survey-enter-to {
+  transform: translateY(0px);
+}
+
+.survey-leave-from {
+}
+.survey-leave-active {
+}
+.survey-leave-from {
+} */
 </style>

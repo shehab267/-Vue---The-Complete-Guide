@@ -25,7 +25,6 @@
 </template>
 
 <script>
-// import { response } from 'express';
 import SurveyResult from './SurveyResult.vue';
 
 export default {
@@ -35,8 +34,8 @@ export default {
   data() {
     return {
       results: [],
-      isLoading: false,
       errorMsg: null,
+      isLoading: false,
     };
   },
   methods: {
@@ -66,7 +65,6 @@ export default {
         .catch((error) => {
           this.isLoading = false;
           this.errorMsg = error;
-          console.log(Error(this.errorMsg));
         });
     },
   },
