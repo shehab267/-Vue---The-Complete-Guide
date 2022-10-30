@@ -43,6 +43,8 @@ const router = createRouter({
   linkActiveClass: 'active',
   scrollBehavior(_, _2, savedPosition) {
     // console.log(_, _2, savedPosition);
+// - Using '_' indicators means I need to get these argments in order to reach the third one 
+    // SavePosition only Works when we go back the previos page
     if (savedPosition) {
       return savedPosition;
     }
