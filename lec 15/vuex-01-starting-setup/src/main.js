@@ -3,12 +3,16 @@ import { createStore } from 'vuex';
 
 import App from './App.vue';
 
-
 const store = createStore({
   state() {
     return {
       counter: 0,
     };
+  },
+  mutations: {
+    increment(state) {
+      state.counter += 2;
+    },
   },
 });
 
