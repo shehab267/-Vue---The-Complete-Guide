@@ -18,10 +18,21 @@ export default {
     ChangeCounter,
   },
   methods: {
+    //  -- Using mutation -- 
+    // addOne() {
+    //   // this.$store.commit('increase', { value: 10 });
+    //   //* -another way to commit
+    //   this.$store.commit({
+    //     type: 'increase',
+    //     value: 10,
+    //   });
+    // },
+
+    //  -- Using Actions for asynchorouns -- 
     addOne() {
-      // this.$store.commit('increase', { value: 10 });
-      //* -another way to commit
-      this.$store.commit({
+      // this.$store.dispatch ('increase', { value: 10 });
+      //* -another way to dispatch 
+      this.$store.dispatch({
         type: 'increase',
         value: 10,
       });
