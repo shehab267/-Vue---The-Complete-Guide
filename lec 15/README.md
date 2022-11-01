@@ -80,3 +80,53 @@ install vuex `npm install --save vuex@next`
       });
   },
 ```
+
+#### 4] Mappimg
+
+- **mapGetters**
+  insted drlilling to store to get the finalCounter we can **import mapGetters from 'vuex'** in the **_computed component_** and push the lastProp we want to access
+
+  ```
+  import { mapGetters } from 'vuex';
+
+  export default {
+    computed: {
+      // counter() {
+      //   return this.$store.getters.normalizedCounter;
+      // },
+      ...mapGetters(['normalizedCounter']),
+    },
+  };
+  ```
+
+  ###### Alternative way to defined mapGetters using object insted array in the sake of using **_alies names_**
+
+  ```
+    ...mapGetters({
+      inc: 'increment',
+      increase: 'increase',
+    }),
+  ```
+
+- **mapActions**
+  used as same mapGetters but in **_methods components_**
+
+  ```
+  import { mapActions } from 'vuex';
+
+  export default {
+  methods: {
+  ...mapActions(['increase', 'increment']),
+  },
+  ```
+
+  Now we can triggered actions name in elements insted of methods
+
+  ###### Alternative way to defined mapAction using object insted array in the sake of using **_alies names_**
+
+  ```
+    ...mapActions({
+      inc: 'increment',
+      increase: 'increase',
+    }),
+  ```
