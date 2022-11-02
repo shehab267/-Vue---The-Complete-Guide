@@ -1,10 +1,30 @@
+# VueX
+
 ## Install needed libarary
 
 install vuex `npm install --save vuex@next`
 
 ## Lessons
 
-#### 1] Mutations
+#### 1] Store
+
+- create store at main.js
+- **multible store** can be used by init new store with all properties then merge it to the main store using **_modules with identifier_**
+
+```
+const store = createStore({
+  modules: {
+    numbers: counterModule,
+  },
+  state() {
+    return {
+      isLoggedIn: false,
+    };
+  },
+});
+```
+
+#### 2] Mutations
 
 - take methods (state, payload) and only works as **_Synchronous_**
 
@@ -130,3 +150,14 @@ install vuex `npm install --save vuex@next`
       increase: 'increase',
     }),
   ```
+
+#### 5] NameSpacing Modules
+
+We can namespacing modules by adding `namespaced: true `
+Then we have to use the name we assign for the module for calling back (mutations, getters, actions) in the coponents
+
+- **access the Vuex prop by using stored name before**
+  ###### Ex: `return this.$store.getters.['numbers/normalizedCounter'];`
+  ` type: numbers/increase`
+- **Using Maps:**
+  ` ...mapGetters('numbers', ['finalCounter'])`
