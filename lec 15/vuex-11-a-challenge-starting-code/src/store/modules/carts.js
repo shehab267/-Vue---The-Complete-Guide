@@ -50,6 +50,15 @@ export default {
     },
   },
   getters: {
-    // define getters for renamming extracting  
+    // define getters for renamming extracting
+    product(state) {
+      return state.items;
+    },
+    totalSum(state) {
+      return state.total;
+    },
+    quantity(state) {
+      return state.qty;
+    },
   },
 };

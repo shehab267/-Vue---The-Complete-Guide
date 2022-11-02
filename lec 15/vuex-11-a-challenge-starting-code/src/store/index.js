@@ -4,10 +4,12 @@ import rootMutations from './mutation';
 import rootActions from './actions.js';
 import rootGetters from './getters.js';
 import productsModule from './modules/products';
+import cartsModule from './modules/carts';
 
 const store = createStore({
   modules: {
-    props: productsModule
+    products: productsModule,
+    cart: cartsModule,
   },
   state() {
     return {
