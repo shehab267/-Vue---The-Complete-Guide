@@ -8,7 +8,7 @@ import cartsModule from './modules/carts';
 
 const store = createStore({
   modules: {
-    products: productsModule,
+    prods: productsModule,
     cart: cartsModule,
   },
   state() {
