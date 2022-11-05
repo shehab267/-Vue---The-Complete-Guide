@@ -1,6 +1,6 @@
 export default {
   //  using namespacing
-  nameSpaced: true,
+  namespaced: true,
   state() {
     return {
       products: [
