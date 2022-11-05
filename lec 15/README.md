@@ -78,7 +78,7 @@ const store = createStore({
 #### 3] Actions
 
 - action get an object as an argument (context), it has a commits a mutation using commit, We can pass an object if the is more arguments
-
+-  ###### **In context**, we actually also do get access to other parts of the Vuex store, not just to this module.
 ```
   actions: {
     increment(context) {

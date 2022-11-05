@@ -31,7 +31,7 @@ export default {
     },
 
     removeProductFromCart(state, payload) {
-      const prodId = payload;
+      const prodId = payload.productId;
       const productInCartIndex = state.items.findIndex(
         (cartItem) => cartItem.productId === prodId
       );

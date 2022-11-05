@@ -31,7 +31,7 @@ export default {
     ...mapGetters(['userIsAuth']),
     cartQuantity() {
       return this.$store.getters['cart/quantity'];
-    },
+    }, 
   },
   methods: {
     ...mapActions(['login', 'logout']),
