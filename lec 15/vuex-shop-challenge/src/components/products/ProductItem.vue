@@ -20,11 +20,11 @@
 
 <script>
 export default {
-  inject: ['addProductToCart'],
   props: ['id', 'image', 'title', 'price', 'description'],
   methods: {
     addToCart() {
-      this.addProductToCart({
+      this.$store.dispatch('cart/addProduct', {
+        // Carefull we expect a 'product key' to the addCart in carts.js so we need to adjust that to only payload and it will to the rest
         id: this.id,
         image: this.image,
         title: this.title,

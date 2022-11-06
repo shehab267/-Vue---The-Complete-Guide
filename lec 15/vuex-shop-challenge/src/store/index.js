@@ -8,6 +8,24 @@ const store = createStore({
     prods: productsModule,
     cart: cartModule,
   },
+  state() {
+    return {
+      isLoggedIn: false,
+    };
+  },
+  mutations: {
+    login(state) {
+      state.isLoggedIn = true;
+    },
+    logout(state) {
+      state.isLoggedIn = false;
+    },
+  },
+  getters: {
+    IsAuthenticated(state) {
+      return state.isLoggedIn;
+    },
+  },
 });
 
 export default store;
