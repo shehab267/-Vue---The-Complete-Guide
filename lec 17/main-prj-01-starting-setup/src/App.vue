@@ -1,6 +1,5 @@
 <template>
   <the-header></the-header>
-  Test from Home
   <router-view></router-view>
 </template>
 
