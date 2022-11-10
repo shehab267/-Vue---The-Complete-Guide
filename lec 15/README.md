@@ -52,6 +52,7 @@ const store = createStore({
 #### 2] getters
 
 - like mutations can have state and getters
+  **It's recommended to use getter for accessing the data**
 
 ```
   getters: {
@@ -78,7 +79,8 @@ const store = createStore({
 #### 3] Actions
 
 - action get an object as an argument (context), it has a commits a mutation using commit, We can pass an object if the is more arguments
--  ###### **In context**, we actually also do get access to other parts of the Vuex store, not just to this module.
+- ###### **In context**, we actually also do get access to other parts of the Vuex store, not just to this module.
+
 ```
   actions: {
     increment(context) {
