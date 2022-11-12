@@ -47,7 +47,7 @@ export default {
       // Updates the old Filter
       this.filter = updatedFilter;
       // Emits the new filter so it can be provided in other components
-      //  pass the updatedFilter as a parameter 
+      //  pass the updatedFilter as a parameter
       this.$emit('change-filter', updatedFilter);
     },
   },

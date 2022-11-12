@@ -14,18 +14,17 @@
       <!-- view the nested Child route => "Contact" -->
       <router-view></router-view>
     </base-card>
-    <section>
-      <base-card>
-        <base-badge
-          v-for="area in areas"
-          :key="area"
-          :type="area"
-          :title="area"
-          >{{ area }}</base-badge
-        >
-        <p>{{ description }}</p>
-      </base-card>
-    </section>
+  </section>
+  <section>
+    <base-card>
+      <base-badge
+        v-for="area in areas"
+        :key="area"
+        :type="area"
+        :title="area"
+      ></base-badge>
+      <p>{{ description }}</p>
+    </base-card>
   </section>
 </template>
 

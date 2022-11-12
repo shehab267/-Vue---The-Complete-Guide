@@ -5,8 +5,10 @@
   <section>
     <base-card>
       <div class="controls">
-        <base-button mode="outline"> Refresh </base-button>
-        <base-button link to="/register">Register as a Coach </base-button>
+        <base-button mode="outline">Refresh</base-button>
+        <base-button v-if="!isCoach" link to="/register"
+          >Register as Coach</base-button
+        >
       </div>
       <ul v-if="hasCoaches">
         <coach-item
@@ -15,12 +17,11 @@
           :id="coach.id"
           :first-name="coach.firstName"
           :last-name="coach.lastName"
-          :areas="coach.areas"
           :rate="coach.hourlyRate"
-        >
-        </coach-item>
+          :areas="coach.areas"
+        ></coach-item>
       </ul>
-      <p v-else>No Coaches Found!</p>
+      <h3 v-else>No Coaches Found!</h3>
     </base-card>
   </section>
 </template>
@@ -43,6 +44,9 @@ export default {
     };
   },
   computed: {
+    isCoach() {
+      return this.$store.getters['coaches/isCoach'];
+    },
     filteredCoaches() {
       // Return the Coaches who matches our filters
       const coaches = this.$store.getters['coaches/coaches'];
