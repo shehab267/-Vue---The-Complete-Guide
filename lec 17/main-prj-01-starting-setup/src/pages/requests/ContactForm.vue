@@ -6,19 +6,21 @@
     </div>
     <div class="form-control">
       <label for="message">Message</label>
-      <textarea id="message" rows="5" v-model.trim="email"></textarea>
-    </div>
-    <div class="actions">
-      <base-button>Send</base-button>
+      <textarea id="message" rows="5" v-model.trim="message"></textarea>
     </div>
     <p class="errors" v-if="!formIsValid">
       Please input a valid email and not empty message
     </p>
+    <div class="actions">
+      <base-button>Send</base-button>
+    </div>
   </form>
 </template>
 
 <script>
 export default {
+  // Another way to pass the CoachId for the message
+  // props: ['id'], // Used to pass the coach ID to the message
   data() {
     return {
       email: '',
@@ -38,6 +40,13 @@ export default {
         this.formIsValid = false;
         return;
       }
+      //  User Vuex to store the messa
+      this.$store.dispatch('/requests/contactCoach', {
+        coachId: this.$route.params.id,
+        email: this.email,
+        message: this.message,
+      });
+      this.$router.replace('/coaches');
     },
   },
 };
