@@ -4,7 +4,7 @@ export default {
       id: new Date().toISOString(),
       coachId: payload.coachId,
       userEmail: payload.email,
-      userMessage: payload.message,
+      message: payload.message,
     };
     // commit addRequests mutation and pass the payload 'newRequest'
     context.commit('addRequests', newRequest);

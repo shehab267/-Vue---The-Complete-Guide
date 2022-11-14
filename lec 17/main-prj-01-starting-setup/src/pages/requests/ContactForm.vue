@@ -12,7 +12,7 @@
       Please input a valid email and not empty message
     </p>
     <div class="actions">
-      <base-button>Send</base-button>
+      <base-button>Send Message</base-button>
     </div>
   </form>
 </template>
@@ -41,7 +41,7 @@ export default {
         return;
       }
       //  User Vuex to store the messa
-      this.$store.dispatch('/requests/contactCoach', {
+      this.$store.dispatch('requests/contactCoach', {
         coachId: this.$route.params.id,
         email: this.email,
         message: this.message,
