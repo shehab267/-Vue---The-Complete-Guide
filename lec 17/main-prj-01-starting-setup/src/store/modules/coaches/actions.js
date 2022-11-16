@@ -42,7 +42,7 @@ export default {
   async loadCoaches(context) {
     //  Fetching all coaches from Database
     const response = await fetch(
-      `https://finding-coach-web-app-default-rtdb.firebaseio.com/coaches.json`
+      'https://finding-coach-web-app-default-rtdb.firebaseio.com/coaches.json'
     );
     const responseData = await response.json();
     // Catching Errors
@@ -55,7 +55,7 @@ export default {
     //  Define new coaches
     // Go through entire responseData "Object full of Coaches" => get each id as 'KEY' => constract newCoach with the same format as CoachData
     for (const key in responseData) {
-      const newCoach = {
+      const coach = {
         id: key,
         firstName: responseData[key].firstName,
         lastName: responseData[key].lastName,
@@ -63,7 +63,7 @@ export default {
         description: responseData[key].description,
         hourlyRate: responseData[key].hourlyRate,
       };
-      coaches.push(newCoach);
+      coaches.push(coach);
     }
     context.commit('setCoaches', coaches);
   },
