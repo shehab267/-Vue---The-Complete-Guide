@@ -11,3 +11,7 @@ Register as a coach
 #### Validation Libirary:
 
 for more secure, using libraries like https://vueformulate.com/ to make strong validations on our forms.
+
+use FireBase as a dataBase
+
+link between firebase and vuex
