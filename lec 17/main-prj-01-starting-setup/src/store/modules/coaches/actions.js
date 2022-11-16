@@ -39,4 +39,32 @@ export default {
       id: userId,
     });
   },
+  async loadCoaches(context) {
+    //  Fetching all coaches from Database
+    const response = await fetch(
+      `https://finding-coach-web-app-default-rtdb.firebaseio.com/coaches.json`
+    );
+    const responseData = await response.json();
+    // Catching Errors
+    if (!response.ok) {
+      // Throw error
+    }
+
+    //  Converting Object Json Data to array => easy to push data
+    const coaches = [];
+    //  Define new coaches
+    // Go through entire responseData "Object full of Coaches" => get each id as 'KEY' => constract newCoach with the same format as CoachData
+    for (const key in responseData) {
+      const newCoach = {
+        id: key,
+        firstName: responseData[key].firstName,
+        lastName: responseData[key].lastName,
+        areas: responseData[key].areas,
+        description: responseData[key].description,
+        hourlyRate: responseData[key].hourlyRate,
+      };
+      coaches.push(newCoach);
+    }
+    context.commit('setCoaches', coaches);
+  },
 };
