@@ -16,7 +16,7 @@ export default {
     // Fetch data with Vuex using 'fireBase'
     // * using the modern way "async - await" insted of 'promise - then'
     const response = await fetch(
-      `https://finding-coach-web-app-default-rtdb.firebaseio.com/${userId}.json`,
+      `https://finding-coach-web-app-default-rtdb.firebaseio.com/coaches/${userId}.json`,
       {
         // 'PUT' request => overWritten data if existed, or created if not
         method: 'PUT',
