@@ -42,12 +42,14 @@ export default {
   async loadCoaches(context) {
     //  Fetching all coaches from Database
     const response = await fetch(
-      'https://finding-coach-web-app-default-rtdb.firebaseio.com/coaches.json'
+      'https://finding-coach-web-app-default-rtdb.firebaseio.com/coaches.jso'
     );
     const responseData = await response.json();
     // Catching Errors
     if (!response.ok) {
       // Throw error
+      const error = new Error(responseData || 'Faild to fetch!');
+      throw error;
     }
 
     //  Converting Object Json Data to array => easy to push data
