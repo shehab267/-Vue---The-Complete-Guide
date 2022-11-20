@@ -24,11 +24,13 @@ export default {
       }
     );
 
-    // const responseData = await response.json()
+    const responseData = await response.json();
 
     // Catching errors
     if (!response.ok) {
       // Throw error
+      const error = new Error(responseData || 'Something went wrong!');
+      throw error;
     }
 
     //  adding the fixed data to the action
@@ -42,7 +44,7 @@ export default {
   async loadCoaches(context) {
     //  Fetching all coaches from Database
     const response = await fetch(
-      'https://finding-coach-web-app-default-rtdb.firebaseio.com/coaches.jso'
+      'https://finding-coach-web-app-default-rtdb.firebaseio.com/coaches.json'
     );
     const responseData = await response.json();
     // Catching Errors

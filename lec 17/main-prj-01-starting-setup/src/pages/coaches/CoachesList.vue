@@ -1,6 +1,6 @@
 <template>
   <!-- error -> String, convert to Boolean with '!' return true | false  -->
-  <base-dialog :show="!!error" title="Error" @close="handleError">
+  <base-dialog :show="!!error" title="Loading Error" @close="handleError">
     <p>{{ error }}</p>
   </base-dialog>
   <section>
