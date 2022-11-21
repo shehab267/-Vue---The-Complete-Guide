@@ -3,7 +3,7 @@ export default {
 
   requests(state, _, _2, rootGetters) {
     const coachId = rootGetters.userId;
-    console.log(state.requests);
+    // console.log(state.requests);
     return state.requests.filter((req) => coachId === req.coachId);
   },
   //  now We access filterd Requests => getters NOT store

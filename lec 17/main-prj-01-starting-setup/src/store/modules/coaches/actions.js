@@ -23,13 +23,12 @@ export default {
         body: JSON.stringify(coachData),
       }
     );
-
     const responseData = await response.json();
 
     // Catching errors
     if (!response.ok) {
       // Throw error
-      const error = new Error(responseData || 'Something went wrong!');
+      const error = new Error(responseData.message || 'Something went wrong!');
       throw error;
     }
 
