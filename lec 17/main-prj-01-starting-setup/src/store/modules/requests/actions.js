@@ -34,7 +34,7 @@ export default {
   async fetchRequests(context) {
     // Load Requests for ONLY currently active users
     // Getting UserId from our global state -> getters
-    const coachId = context.rootGetter.userId;
+    const coachId = context.rootGetters.userId;
     const response = await fetch(
       `https://finding-coach-web-app-default-rtdb.firebaseio.com/requests/${coachId}.json`
     );
@@ -57,7 +57,7 @@ export default {
       const request = {
         id: key,
         coachId: coachId,
-        userEmail: responseData[key].email,
+        userEmail: responseData[key].userEmail,
         message: responseData[key].message,
       };
       requests.push(request);
