@@ -40,10 +40,14 @@ export default {
       id: userId,
     });
   },
-  async loadCoaches(context) {
-// Cheack should upload the data
-    if (!context.getters.shouldUpdate) {
-      return
+  async loadCoaches(context, payload) {
+    // Cheack should upload the data
+    // ForceRefresh logic:
+    // "we don't need to refresh when loadCoaches is Called from Created Life Cycle, but onClick refresh inside the page"
+    //  - pass Boolean to paylod to loadCoaches action on click Refresh
+
+    if (!payload.forceRefresh && !context.getters.shouldUpdate) {
+      return;
     }
 
     //  Fetching all coaches from Database
