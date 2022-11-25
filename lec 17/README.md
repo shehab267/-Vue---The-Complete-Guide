@@ -17,3 +17,10 @@ use FireBase as a dataBase
 link between firebase and vuex
 
 Fetching Coaches & requests to the cload
+
+##### to do
+
+- loading spinner at contactForm for 3 sec
+and output a message:
+  - Success -> Green
+  - failed -> Red

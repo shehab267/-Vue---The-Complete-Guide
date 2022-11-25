@@ -49,7 +49,7 @@ export default {
     // Catching Errors
     if (!response.ok) {
       // Throw error
-      const error = new Error(responseData || 'Faild to fetch!');
+      const error = new Error(responseData.message || 'Faild to fetch!');
       throw error;
     }
 

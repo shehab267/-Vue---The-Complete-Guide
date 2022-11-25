@@ -1,7 +1,6 @@
 export default {
   async contactCoach(context, payload) {
     const newRequest = {
-      coachId: payload.coachId,
       userEmail: payload.email,
       message: payload.message,
     };
@@ -19,6 +18,8 @@ export default {
 
     // convert the fireBase's id to name
     newRequest.id = responseData.name;
+    //  Get CoachId for using locally
+    newRequest.coachId = payload.coachId;
 
     if (!response.ok) {
       // Throw error
@@ -28,5 +29,39 @@ export default {
 
     // commit addRequests mutation and pass the payload 'newRequest'
     context.commit('addRequests', newRequest);
+  },
+
+  async fetchRequests(context) {
+    // Load Requests for ONLY currently active users
+    // Getting UserId from our global state -> getters
+    const coachId = context.rootGetter.userId;
+    const response = await fetch(
+      `https://finding-coach-web-app-default-rtdb.firebaseio.com/requests/${coachId}.json`
+    );
+
+    const responseData = await response.json();
+
+    console.log(responseData);
+
+    if (!response.ok) {
+      const error = new Error(
+        responseData.message || 'Failed to fetch the requests!'
+      );
+      throw error;
+    }
+
+    //  Converting Object Json Data to array => easy to push data
+    const requests = [];
+    //  Loop throw all Coach's requests and load them
+    for (const key in responseData) {
+      const request = {
+        id: key,
+        coachId: coachId,
+        userEmail: responseData[key].email,
+        message: responseData[key].message,
+      };
+      requests.push(request);
+    }
+    context.commit('loadRequests', requests);
   },
 };

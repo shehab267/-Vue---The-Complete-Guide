@@ -17,7 +17,7 @@
       <div v-if="isLoading">
         <base-spinner></base-spinner>
       </div>
-      <ul v-else-if="hasCoaches">
+      <ul v-else-if="hasCoaches && !isLoading">
         <coach-item
           v-for="coach in filteredCoaches"
           :key="coach.id"
@@ -54,7 +54,7 @@ export default {
     };
   },
   created() {
-    // Excuted this component's method with view life cycle methods
+    // Excuted this component's method with vue life cycle methods
     this.loadCoaches();
   },
   computed: {
