@@ -1,27 +1,29 @@
 <template>
-  <!-- error -> String, convert to Boolean with '!' return true | false  -->
-  <base-dialog :show="!!error" title="Loading Error" @close="handleError">
-    <p>{{ error }}</p>
-  </base-dialog>
-  <section>
-    <base-card>
-      <header>
-        <h2>Requests Received</h2>
-      </header>
-      <div v-if="isLoading">
-        <base-spinner></base-spinner>
-      </div>
-      <ul v-else-if="hasRequests && !isLoading">
-        <request-item
-          v-for="request in receivedRequests"
-          :key="request.id"
-          :email="request.userEmail"
-          :message="request.message"
-        ></request-item>
-      </ul>
-      <p v-else>You don't have any requests yet</p>
-    </base-card>
-  </section>
+  <div>
+    <!-- error -> String, convert to Boolean with '!' return true | false  -->
+    <base-dialog :show="!!error" title="Loading Error" @close="handleError">
+      <p>{{ error }}</p>
+    </base-dialog>
+    <section>
+      <base-card>
+        <header>
+          <h2>Requests Received</h2>
+        </header>
+        <div v-if="isLoading">
+          <base-spinner></base-spinner>
+        </div>
+        <ul v-else-if="hasRequests && !isLoading">
+          <request-item
+            v-for="request in receivedRequests"
+            :key="request.id"
+            :email="request.userEmail"
+            :message="request.message"
+          ></request-item>
+        </ul>
+        <p v-else>You don't have any requests yet</p>
+      </base-card>
+    </section>
+  </div>
 </template>
 
 <script>
