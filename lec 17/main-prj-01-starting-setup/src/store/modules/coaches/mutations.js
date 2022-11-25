@@ -7,4 +7,8 @@ export default {
     // here I want to set the coaches from local into DataBase's Coaches
     state.coaches = payload;
   },
+  setFetchTimeStamp(state) {
+    // Store time with every fetching 'loadCoaches'
+    state.lastFetch = new Date().getTime();
+  },
 };

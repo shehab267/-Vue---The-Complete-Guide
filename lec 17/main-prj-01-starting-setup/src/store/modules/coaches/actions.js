@@ -41,6 +41,11 @@ export default {
     });
   },
   async loadCoaches(context) {
+// Cheack should upload the data
+    if (!context.getters.shouldUpdate) {
+      return
+    }
+
     //  Fetching all coaches from Database
     const response = await fetch(
       'https://finding-coach-web-app-default-rtdb.firebaseio.com/coaches.json'
@@ -69,5 +74,7 @@ export default {
       coaches.push(coach);
     }
     context.commit('setCoaches', coaches);
+    // Store time with every fetching
+    context.commit('setFetchTimeStamp');
   },
 };
