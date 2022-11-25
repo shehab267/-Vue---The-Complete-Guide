@@ -41,8 +41,6 @@ export default {
 
     const responseData = await response.json();
 
-    console.log(responseData);
-
     if (!response.ok) {
       const error = new Error(
         responseData.message || 'Failed to fetch the requests!'
