@@ -1,15 +1,15 @@
 import mutations from './mutations.js';
+import getters from './getters';
 import actions from './actions.js';
-import getters from './getters.js';
 
 export default {
   namespaced: true,
   state() {
     return {
-      requests: []
+      requests: [],
     };
   },
   mutations,
+  getters,
   actions,
-  getters
 };

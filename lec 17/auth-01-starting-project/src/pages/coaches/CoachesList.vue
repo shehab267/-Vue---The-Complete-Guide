@@ -1,21 +1,26 @@
 <template>
   <div>
-    <base-dialog :show="!!error" title="An error occurred!" @close="handleError">
+    <!-- error -> String, convert to Boolean with '!' return true | false  -->
+    <base-dialog :show="!!error" title="Loading Error" @close="handleError">
       <p>{{ error }}</p>
     </base-dialog>
     <section>
-      <coach-filter @change-filter="setFilters"></coach-filter>
+      <coach-filter @change-filter="setFilter"></coach-filter>
     </section>
     <section>
       <base-card>
         <div class="controls">
-          <base-button mode="outline" @click="loadCoaches(true)">Refresh</base-button>
-          <base-button v-if="!isCoach && !isLoading" link to="/register">Register as Coach</base-button>
+          <base-button mode="outline" @click="loadCoaches(true)"
+            >Refresh</base-button
+          >
+          <base-button v-if="!isCoach && !isLoading" link to="/register"
+            >Register as Coach</base-button
+          >
         </div>
         <div v-if="isLoading">
           <base-spinner></base-spinner>
         </div>
-        <ul v-else-if="hasCoaches">
+        <ul v-else-if="hasCoaches && !isLoading">
           <coach-item
             v-for="coach in filteredCoaches"
             :key="coach.id"
@@ -26,7 +31,7 @@
             :areas="coach.areas"
           ></coach-item>
         </ul>
-        <h3 v-else>No coaches found.</h3>
+        <h3 v-else>No Coaches Found!</h3>
       </base-card>
     </section>
   </div>
@@ -45,27 +50,33 @@ export default {
     return {
       isLoading: false,
       error: null,
-      activeFilters: {
+      activeFilter: {
         frontend: true,
         backend: true,
         career: true,
       },
     };
   },
+  created() {
+    // Excuted this component's method with vue life cycle methods
+    this.loadCoaches();
+  },
   computed: {
     isCoach() {
       return this.$store.getters['coaches/isCoach'];
     },
     filteredCoaches() {
+      // Return the Coaches who matches our filters
       const coaches = this.$store.getters['coaches/coaches'];
       return coaches.filter((coach) => {
-        if (this.activeFilters.frontend && coach.areas.includes('frontend')) {
+        // Cheack if =>  frontend "Cheacked" && Coach's skill "frontend"
+        if (this.activeFilter.frontend && coach.areas.includes('frontend')) {
           return true;
         }
-        if (this.activeFilters.backend && coach.areas.includes('backend')) {
+        if (this.activeFilter.backend && coach.areas.includes('backend')) {
           return true;
         }
-        if (this.activeFilters.career && coach.areas.includes('career')) {
+        if (this.activeFilter.career && coach.areas.includes('career')) {
           return true;
         }
         return false;
@@ -75,12 +86,10 @@ export default {
       return !this.isLoading && this.$store.getters['coaches/hasCoaches'];
     },
   },
-  created() {
-    this.loadCoaches();
-  },
   methods: {
-    setFilters(updatedFilters) {
-      this.activeFilters = updatedFilters;
+    // trigger setfilter from emit the event change-filter with 'updatedFilter' as an argument
+    setFilter(updatedFilter) {
+      this.activeFilter = updatedFilter;
     },
     async loadCoaches(refresh = false) {
       this.isLoading = true;
