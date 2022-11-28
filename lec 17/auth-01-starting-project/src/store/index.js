@@ -2,24 +2,13 @@ import { createStore } from 'vuex';
 
 import coachesModule from './modules/coaches/index';
 import requestsModule from './modules/requests/index.js';
+import authModule from './modules/auth/index'
 
 const store = createStore({
   modules: {
     coaches: coachesModule,
     requests: requestsModule,
-  },
-  state() {
-    return {
-      userId: 'c3',
-    };
-  },
-  // mutations: {},
-  // actions: {},
-  getters: {
-    //  Make ID hard code for now till fetch with cloud
-    userId(state) {
-      return state.userId;
-    },
+    auth: authModule
   },
 });
 

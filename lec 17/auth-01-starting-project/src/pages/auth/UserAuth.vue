@@ -60,8 +60,19 @@ export default {
         this.formIsValid = false;
         return;
       }
-      console.log(this.email, this.password);
+
+      // fetching data and authentication
+      if (this.mode === 'login') {
+        // ...
+      } else {
+        //  and pass the email and password as expicted from the payload
+        this.$store.dispatch('signup', {
+          email: this.email,
+          password: this.password,
+        });
+      }
     },
+
     switchAuthMode() {
       if (this.mode === 'login') {
         this.mode = 'singup';

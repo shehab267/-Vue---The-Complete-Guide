@@ -1,5 +1,6 @@
 # Authentication & Vue
 
+### Pages
 
-### Pages 
-- UserAuth Form
+- UserAuth Form **(Pages)**
+- auth **(Store)**
