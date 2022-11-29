@@ -7,12 +7,9 @@
     >
       <p>{{ error }}</p>
     </base-dialog>
-    <base-dialog
-      :show="isLoading"
-      title="Authentication..."
-      fixed
-    >
-    <base-spinner></base-spinner></base-dialog>
+    <base-dialog :show="isLoading" title="Authentication..." fixed>
+      <base-spinner></base-spinner
+    ></base-dialog>
     <base-card>
       <form @submit.prevent="submitForm">
         <div class="form-control">
@@ -78,16 +75,18 @@ export default {
         return;
       }
       this.isLoading = true;
+      const actionPayload = {
+        email: this.email,
+        password: this.password,
+      };
+
       try {
         // fetching data and authentication
         if (this.mode === 'login') {
-          // ...
+          await this.$store.dispatch('login', actionPayload);
         } else {
           //  and pass the email and password as expicted from the payload
-          await this.$store.dispatch('signup', {
-            email: this.email,
-            password: this.password,
-          });
+          await this.$store.dispatch('signup', actionPayload);
         }
       } catch (error) {
         this.error = error.message || 'Faild to authenticate!, try again';
