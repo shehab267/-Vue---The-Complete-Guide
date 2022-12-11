@@ -10,7 +10,9 @@
       <base-card>
         <header>
           <h2>Interested? Reach out now!</h2>
-          <base-button link :to="contactLink">Contact</base-button>
+          <base-button v-if="!alreadyInPage" link :to="contactLink"
+            >Contact</base-button
+          >
         </header>
         <!-- view the nested Child route => "Contact" -->
         <router-view></router-view>
@@ -43,7 +45,10 @@ export default {
       return `${this.selectedCoach.firstName} ${this.selectedCoach.lastName}`;
     },
     contactLink() {
-      return `${this.$route.path}/${this.id}/contact`; // EX: /coaches/c1/contact
+      if (this.$route.path === `/coaches/${this.id}/contact`) {
+        return;
+      }
+      return `${this.$route.path}/contact`; // EX: /coaches/c1/contact
     },
     areas() {
       return this.selectedCoach.areas;
@@ -53,6 +58,9 @@ export default {
     },
     description() {
       return this.selectedCoach.description;
+    },
+    alreadyInPage() {
+      return this.$route.path === `/coaches/${this.id}/contact`;
     },
   },
   // Recreate the component with a specific changes
