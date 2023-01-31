@@ -1,26 +1,26 @@
 <template>
   <section class="container">
-    <h2>{{ user.name }}</h2>
-    <h2>{{ user.age }}</h2>
+    <h2>{{ name }}</h2>
+    <h2>{{ age }}</h2>
+    <button @click="upgradeAge">Update Age</button>
   </section>
 </template>
 
 <script setup>
-// import { ref } from 'vue'; // for simple cases
-import { reactive } from 'vue'; // Complex case with nested data (Objects, arrays)
+import { ref } from 'vue'; // for simple cases
+// import { reactive } from 'vue'; // Complex case with nested data (Objects, arrays)
 
-// const userName = ref('Maximilian');
-const user = reactive({
-  name: 'Maximilian',
-  age: 31,
-});
+const name = ref('Maximilian');
+const age = ref(20);
+// const user = reactive({
+//   name: 'Maximilian',
+//   age: 31,
+// });
 
-setTimeout(() => {
-  // userName.value = 'Max';
-  // user.value.age = 25; //with ref
-  user.name = 'Shehab';
-  user.age = 25;
-}, 2000);
+function upgradeAge() {
+  // user.age = 32;
+  age.value = 32;
+}
 </script>
 
 <style>
