@@ -3,19 +3,31 @@
     <h2>{{ name }}</h2>
     <h2>{{ age }}</h2>
     <button @click="upgradeAge">Update Age</button>
+
+    <div>
+      <input type="text" placeholder="firstName" v-model="firstName" />
+      <input type="text" placeholder="lastName" v-model="lastName" />
+    </div>
   </section>
 </template>
 
 <script setup>
-import { ref } from 'vue'; // for simple cases
+import { ref, computed } from 'vue'; // for simple cases
 // import { reactive } from 'vue'; // Complex case with nested data (Objects, arrays)
-
-const name = ref('Maximilian');
+// const name = ref('Maximilian');
 const age = ref(20);
-// const user = reactive({
-//   name: 'Maximilian',
-//   age: 31,
-// });
+const firstName = ref('');
+const lastName = ref('');
+const name = computed(function () {
+  return `${firstName.value} ${lastName.value}`;
+});
+
+// function setFirstName(event) {
+//   firstName.value = event.target.value;
+// }
+// function setLastName(event) {
+//   lastName.value = event.target.value;
+// }
 
 function upgradeAge() {
   // user.age = 32;
