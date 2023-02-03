@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'; // for simple cases
+import { ref, computed, watch } from 'vue'; // for simple cases
 // import { reactive } from 'vue'; // Complex case with nested data (Objects, arrays)
 // const name = ref('Maximilian');
 const age = ref(20);
@@ -22,6 +22,11 @@ const name = computed(function () {
   return `${firstName.value} ${lastName.value}`;
 });
 
+watch(age, function (newValue, oldValue) {
+  console.log(age.value);
+  console.log(`Old Age: ${oldValue}`);
+  console.log(`New Age: ${newValue}`);
+});
 // function setFirstName(event) {
 //   firstName.value = event.target.value;
 // }
