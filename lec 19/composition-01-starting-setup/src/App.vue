@@ -4,7 +4,6 @@
       text="upgradeAge"
       :first-name="firstName"
       :last-name="lastName"
-      :age="age"
       @buttonClicked="upgradeAge"
     ></user-data>
 
@@ -19,7 +18,7 @@
 
 <script setup>
 import UserData from './components/UserData.vue';
-import { ref, watch } from 'vue'; // for simple cases
+import { ref, watch, provide } from 'vue'; // for simple cases
 
 const age = ref(20);
 const firstName = ref('');
@@ -29,6 +28,8 @@ const lastName = ref('');
 // const name = computed(function () {
 //   return `${firstName.value} ${lastName.value}`;
 // });
+
+provide('userAge', age)
 
 watch(age, function (newValue, oldValue) {
   console.log(age.value);
