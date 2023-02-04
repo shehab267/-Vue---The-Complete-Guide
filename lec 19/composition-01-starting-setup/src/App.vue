@@ -1,52 +1,45 @@
 <template>
   <section class="container">
-    <h2>{{ name }}</h2>
-    <h2>{{ age }}</h2>
-    <button @click="upgradeAge">Update Age</button>
+    <user-data
+      text="upgradeAge"
+      :first-name="firstName"
+      :last-name="lastName"
+      :age="age"
+      @buttonClicked="upgradeAge"
+    ></user-data>
 
     <div>
       <input type="text" placeholder="firstName" v-model="firstName" />
-      <!-- <input type="text" placeholder="lastName" v-model="lastName" /> -->
-      <input type="text" placeholder="lastName" ref="setlastNameInput" />
+      <input type="text" placeholder="lastName" v-model="lastName" />
+      <!-- <input type="text" placeholder="lastName" ref="setlastNameInput" /> -->
       <button @click="setLastNameFun">Set Name</button>
     </div>
   </section>
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'; // for simple cases
-// import { reactive } from 'vue'; // Complex case with nested data (Objects, arrays)
-// const name = ref('Maximilian');
+import UserData from './components/UserData.vue';
+import { ref, watch } from 'vue'; // for simple cases
+
 const age = ref(20);
 const firstName = ref('');
 const lastName = ref('');
-const setlastNameInput = ref(null);
+// const setlastNameInput = ref('Samir');
 
-const name = computed(function () {
-  return `${firstName.value} ${lastName.value}`;
-});
+// const name = computed(function () {
+//   return `${firstName.value} ${lastName.value}`;
+// });
 
 watch(age, function (newValue, oldValue) {
   console.log(age.value);
   console.log(`Old Age: ${oldValue}`);
   console.log(`New Age: ${newValue}`);
 });
-// function setFirstName(event) {
-//   firstName.value = event.target.value;
-// }
-// function setLastName(event) {
-//   lastName.value = event.target.value;
-// }
 
-function upgradeAge() {
-  // user.age = 32;
-  age.value = 32;
-}
-function setLastNameFun() {
-  console.log(setlastNameInput);
-  console.log(setlastNameInput.value);
-  lastName.value = setlastNameInput.value.value;
-}
+const upgradeAge = (newAge) => {
+  // alert('Child BTN was clicked');
+  age.value = newAge;
+};
 </script>
 
 <style>
