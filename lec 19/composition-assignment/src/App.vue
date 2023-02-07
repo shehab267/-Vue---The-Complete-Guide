@@ -1,46 +1,24 @@
 <template>
-  <header>
-    <h1>Expense Tracker</h1>
-  </header>
-  <section>
-    <div>Available Funds: {{ data.availableFunds }}</div>
-    <div>Total Expenses: {{ data.currentExpenses }}</div>
-    <hr />
-    <div>Funds left: {{ remainingFunds }}</div>
-  </section>
-  <section>
-    <form @submit.prevent="addExpense">
-      <div>
-        <label for="amount">Amount</label>
-        <input id="amount" type="number" v-model="data.enteredExpense" />
-      </div>
-      <button>Add Expense</button>
-    </form>
-  </section>
+  <main>
+    <user-list :users="activeUsers" @list-projects="selectUser"></user-list>
+    <projects-list :user="selectedUser"></projects-list>
+  </main>
 </template>
 
 <script setup>
-import { reactive, watch, computed } from 'vue';
+import USER_DATA from './dummy-data.js';
 
-const data = reactive({
-  availableFunds: 100,
-  currentExpenses: 0,
-  enteredExpense: 0,
-});
+import UserList from './components/users/UserList.vue';
+import ProjectsList from './components/projects/ProjectsList.vue';
 
-const remainingFunds = computed(() => {
-  return data.availableFunds - data.currentExpenses;
-});
+import { ref } from 'vue';
 
-const addExpense = function () {
-  data.currentExpenses += data.enteredExpense;
-};
+const selectedUser = ref(null);
+const activeUsers = USER_DATA;
 
-watch(remainingFunds, function (val) {
-  if (val < 0) {
-    alert('You are broke!');
-  }
-});
+function selectUser(uid) {
+  selectedUser.value = activeUsers.find((usr) => usr.id === uid);
+}
 </script>
 
 <style>
@@ -53,45 +31,28 @@ html {
 body {
   margin: 0;
 }
-header {
-  width: 100%;
-  height: 5rem;
+
+main {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #30006e;
-  color: white;
-}
-section {
-  margin: 2rem auto;
-  max-width: 35rem;
-  padding: 1rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  border-radius: 12px;
+  justify-content: space-around;
 }
 
-form div {
-  margin: 1rem 0;
-}
-input {
-  width: 100%;
-  padding: 0.15rem;
-}
-label {
-  font-weight: bold;
-  margin: 0.5rem 0;
-}
 button {
-  background-color: #30006e;
-  border: 1px solid #30006e;
   font: inherit;
-  cursor: pointer;
+  border: 1px solid #00006b;
+  background-color: transparent;
+  color: #00006b;
   padding: 0.5rem 1.5rem;
-  color: white;
+  cursor: pointer;
+  margin: 0.5rem 0.5rem 0.5rem 0;
 }
 button:hover,
 button:active {
-  background-color: #5819ac;
-  border-color: #5819ac;
+  background-color: #efefff;
+}
+
+button.selected {
+  background-color: #00006b;
+  color: white;
 }
 </style>
